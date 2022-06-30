@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -21,8 +22,11 @@ class UserController extends Controller
         $formFields['password'] = bcrypt($formFields['password']);
 
         $users = User::create($formFields);
+        Alert::success('Registered Successfully!','Welcome to your dashboard');
 
         auth()->login($users);
+
+        Alert::success('Registered Successfully!','Welcome to your dashboard');
 
         return redirect('/')->with('message','User created and logged in!');
     }
@@ -40,6 +44,7 @@ class UserController extends Controller
         if(auth()->attempt($formFields,$request->remember)){
             $request->session()->regenerate();
 
+            Alert::success('Login Success', 'Success Message');
             return redirect('/')->with('message','You are logged in!');
         }
 
@@ -52,6 +57,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        Alert::warning('Logout success', 'You have been logged out!');
         return redirect('/')->with('message','You have been logged out!');
     }
 }

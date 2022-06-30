@@ -58,6 +58,7 @@
     <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 </footer>
 
-<x-flash/>
+@include('sweetalert::alert')
+{{--<x-flash/>--}}
 </body>
 </html>
